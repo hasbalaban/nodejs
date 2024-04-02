@@ -7,7 +7,7 @@ const user = require('./models/Users')
 const User = require('./models/Users')
 
 app.use(express.urlencoded({extended : true}))
-app.use(express.json());
+app.use(express.json())
 
 
 mongoose.connect(mongodbUrl)
@@ -88,19 +88,12 @@ app.post('/newUser', (req, res) => {
    // console.log(req)
     console.log(body)
 
-
     const userName = body.userName
     const userSurName = body.userSurName
     const points = body.points
 
-
-    console.log(body)
-    console.log(userName)
-    console.log(userSurName)
-    console.log(body)
-
     if(userName == null || userSurName == null || points == null) {
-        return res.status(406).send("result");
+        return res.status(406).send("wrong body");
     }
 
 
@@ -115,7 +108,17 @@ app.post('/newUser', (req, res) => {
 
     user.save()
     .then((result) => {
-        res.send(result)
+
+    const datestamp = Date.parse(result.createdAt) / 1000;
+
+    const data = {
+        userName : result.userName,
+        userSurName : result.userSurName,
+        points : result.points,
+        createdAt : datestamp
+    }
+
+        res.send(data)
     })
     .catch((error) => {
         console.log(error)
