@@ -7,6 +7,7 @@ const user = require('./models/Users')
 const User = require('./models/Users')
 
 app.use(express.urlencoded({extended : true}))
+app.use(express.json());
 
 
 mongoose.connect(mongodbUrl)
@@ -83,9 +84,25 @@ app.get('/findUserById/:id', (req,res) => {
 app.post('/newUser', (req, res) => {
     const body = req.body
 
+
+   // console.log(req)
+    console.log(body)
+
+
     const userName = body.userName
     const userSurName = body.userSurName
     const points = body.points
+
+
+    console.log(body)
+    console.log(userName)
+    console.log(userSurName)
+    console.log(body)
+
+    if(userName == null || userSurName == null || points == null) {
+        return res.status(406).send("result");
+    }
+
 
     const user = new User({
         userName : userName,
@@ -98,7 +115,7 @@ app.post('/newUser', (req, res) => {
 
     user.save()
     .then((result) => {
-
+        res.send(result)
     })
     .catch((error) => {
         console.log(error)
