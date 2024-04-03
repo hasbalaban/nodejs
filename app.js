@@ -20,5 +20,8 @@ mongoose.connect(mongodbUrl)
     console.log("error!")
 })
 
+app.get("/", (req, res) => {
+    res.send("wrong request contact to this 'hasan-balaban@hotmail.com' ")
+})
 
-app.use(userRoutes)
+app.use('/user',userRoutes)

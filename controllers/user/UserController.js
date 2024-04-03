@@ -1,5 +1,5 @@
 //models
-const user = require('../../models/Users')
+const User = require('../../models/Users')
 
 
 const findUserById = (req,res) => {
