@@ -20,6 +20,8 @@ const saveNewUser = (req, res) => {
     const userSurName = body.userSurName
     const points = body.points
 
+
+
     if(userName == null || userSurName == null || points == null) {
         return res.status(406).send("wrong body");
     }
@@ -38,8 +40,7 @@ const saveNewUser = (req, res) => {
     const data = {
         userName : result.userName,
         userSurName : result.userSurName,
-        points : result.points,
-        createdAt : datestamp
+        points : result.points
     }
 
     res.json(data)
@@ -52,7 +53,7 @@ const saveNewUser = (req, res) => {
 const deleteUserById = (req,res) => {
     const id = req.params.id
     if (id == null) res.send("user not found")
-    user.findByIdAndDelete(id)
+    User.findByIdAndDelete(id)
     .then((result) =>{
         if(result == null){
              return res.send("user not exist")
@@ -67,7 +68,7 @@ const deleteUserById = (req,res) => {
 
 
 const getAllUsersAndSortByPoints = (req,res) => {
-    user.find().sort({points: -1})
+    User.find().sort({points: -1})
     .then((result) =>{
         res.send(result)
     })

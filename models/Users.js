@@ -14,9 +14,12 @@ const userSchema = new schema({
         type : String,
         require : true,
         default  : 0
-
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
-}, {timestamps : true})
+})
 
 const User = mongoose.model('User', userSchema)
 module.exports = User
