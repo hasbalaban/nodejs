@@ -5,9 +5,26 @@ const User = require('../../models/Users')
 const findUserById = (req,res) => {
     const id = req.params.id
     if (id == null) res.send("not found")
-    user.findById(id)
+    User.findById(id)
     .then((result) =>{
-        res.send(result)
+
+        const errorResponse = {
+            code : 200,
+            name : "error",
+            message : "no error error error",
+        }
+
+        const response = {
+            isSuccess : true,
+            data : result,
+            message : "message message message ddd",
+            error : errorResponse,
+            dateTime : result.dateTime
+        }
+
+
+        res.send(response)
+
     })
     .catch((error) => {
         console.log(error)
@@ -70,7 +87,22 @@ const deleteUserById = (req,res) => {
 const getAllUsersAndSortByPoints = (req,res) => {
     User.find().sort({points: -1})
     .then((result) =>{
-        res.send(result)
+
+        const errorResponse = {
+            code : 200,
+            name : "error",
+            message : "no error error error",
+        }
+
+        const response = {
+            isSuccess : true,
+            data : result,
+            message : "message message message ddd",
+            error : errorResponse,
+            dateTime : result.dateTime
+        }
+
+        res.send(response)
     })
     .catch((error) => {
         console.log(error)

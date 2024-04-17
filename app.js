@@ -17,7 +17,7 @@ mongoose.connect(mongodbUrl)
     app.listen(3000)
 })
 .catch((err) => {
-    console.log("error!")
+    console.log(err)
 })
 
 app.get("/", (req, res) => {
